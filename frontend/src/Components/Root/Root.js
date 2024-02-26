@@ -1,14 +1,11 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import Header from "../Header/Header";
 
 function Root() {
   return (
     <div>
-      <header className="bg-primary">
-        <nav className="navbar">
-          <Link className="navbar-toggler">Home</Link>
-        </nav>
-      </header>
+      <Header />
       <Outlet />
       <footer></footer>
     </div>
