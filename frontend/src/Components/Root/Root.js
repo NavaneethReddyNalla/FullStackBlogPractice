@@ -1,13 +1,15 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
+
+import "./Root.css";
 
 function Root() {
   return (
     <div>
       <Header />
       <Outlet />
-      <footer></footer>
+      <footer className="bg-dark bg-gradient"></footer>
     </div>
   );
 }
