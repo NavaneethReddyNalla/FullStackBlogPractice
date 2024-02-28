@@ -1,7 +1,11 @@
 import React from "react";
 
 function SignUp() {
-  return <div>SignUp</div>;
+  return (
+    <div className="bg-primary background">
+      <form></form>
+    </div>
+  );
 }
 
 export default SignUp;
