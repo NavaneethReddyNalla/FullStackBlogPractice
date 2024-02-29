@@ -20,7 +20,7 @@ function SignUp() {
         <div className="py-2">
           <input
             type="radio"
-            {...register("userType")}
+            {...register("userType", { required: true })}
             id="user"
             value="user"
             className="mx-1"
@@ -31,26 +31,36 @@ function SignUp() {
 
           <input
             type="radio"
-            {...register("userType")}
+            {...register("userType", { required: true })}
             id="author"
             value="author"
             className="mx-1"
           />
           <label htmlFor="user">Author</label>
+          {errors.userType?.type === "required" && (
+            <p className="lead text-danger">User type not selected</p>
+          )}
         </div>
 
         <input
           type="text"
           className="form-control my-2"
           placeholder="Username"
-          {...register("username")}
+          {...register("username", {
+            required: true,
+            minLength: 4,
+            maxLength: 25,
+          })}
           id="username"
         />
+        {errors.username?.type === "required" && (
+          <p className="lead text-danger">Username Required</p>
+        )}
 
         <input
           type="password"
           placeholder="Password"
-          {...register("password")}
+          {...register("password", { required: true })}
           id="password"
           className="form-control my-2"
         />
@@ -58,7 +68,7 @@ function SignUp() {
         <input
           type="email"
           placeholder="Email"
-          {...register("email")}
+          {...register("email", { required: true })}
           id="email"
           className="form-control my-2"
         />
