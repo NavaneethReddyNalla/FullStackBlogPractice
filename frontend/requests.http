@@ -1,0 +1,29 @@
+### Creating an author
+post http://localhost:5000/author/user
+Content-Type: application/json
+
+{
+    "userType": "author",
+    "username": "bhanu",
+    "password": "bhanu",
+    "email": "bhanu@gmail.com"
+}
+
+### Inserting an article
+post http://localhost:5000/author/new-article
+Content-Type: application/json
+
+{
+    "articleId": "{{$timestamp}}",
+    "title": "F of JS",
+    "category": "Programming",
+    "content": "lsdafhaslgkwabgikoiwafawjilwghw",
+    "dateOfCreation": "{{$datetime iso8601}}",
+    "dataOfModification": "{{$datetime iso8601}}",
+    "username": "bhanu",
+    "comments": [ ],
+    "status": true
+}
+
+### Read articles by author's username
+GET http://localhost:5000/author/articles/bhanu HTTP/1.1

@@ -12,8 +12,10 @@ mongoClient
     const dbObj = client.db("blogappdb");
     const usersCollection = dbObj.collection("users");
     const authorsCollection = dbObj.collection("authors");
+    const articlesCollection = dbObj.collection("articles");
     app.set("usersCollection", usersCollection);
     app.set("authorsCollection", authorsCollection);
+    app.set("articlesCollection", articlesCollection);
     console.log("Database connection established");
   })
   .catch((err) => console.log("Error connecting to Database"));
