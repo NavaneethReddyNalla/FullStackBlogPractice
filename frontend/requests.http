@@ -27,3 +27,22 @@ Content-Type: application/json
 
 ### Read articles by author's username
 GET http://localhost:5000/author/articles/bhanu HTTP/1.1
+
+### Edit the article
+put http://localhost:5000/author/article
+Content-Type: application/json
+
+{
+    "articleId": "1709215839",
+    "title": "F of JS",
+    "category": "Programming",
+    "content": "lsdafha",
+    "dateOfCreation": "2024-02-29T14:10:39.778Z",
+    "dataOfModification": "{{$datetime iso8601}}",
+    "username": "bhanu",
+    "comments": [ ],
+    "status": true
+}
+
+### Delete the article
+DELETE http://localhost:5000/author/article/1709215839 HTTP/1.1
