@@ -30,4 +30,20 @@ userApp.get(
   })
 );
 
+// Write a comment for the user to an article
+userApp.post(
+  "/comment/:articleId",
+  expressAsyncHandler(async (req, res) => {
+    const articleId = req.params.articleId;
+    const userComment = req.body;
+
+    await articlesCollection.updateOne(
+      { articleId: articleId },
+      { $push: { comments: userComment } }
+    );
+
+    res.send({ message: "Comment added" });
+  })
+);
+
 module.exports = userApp;
