@@ -6,7 +6,7 @@ import "./Header.css";
 function Header() {
   return (
     <div>
-      <header className="bg-dark">
+      <header className="bg-dark bg-gradient">
         <nav className="navbar navbar-expand">
           <ul className="navbar-nav ms-auto">
             <li className="navbar-item mx-3">
