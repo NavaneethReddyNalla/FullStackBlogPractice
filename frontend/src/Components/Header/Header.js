@@ -10,13 +10,19 @@ function Header() {
         <nav className="navbar navbar-expand">
           <ul className="navbar-nav ms-auto">
             <li className="navbar-item mx-3">
-              <Link to="/">Home</Link>
+              <Link className="btn btn-info" to="/">
+                Home
+              </Link>
             </li>
             <li className="navbar-item mx-3">
-              <Link to="/signup">Signup</Link>
+              <Link className="btn btn-info" to="/signup">
+                Signup
+              </Link>
             </li>
             <li className="navbar-item mx-3 me-5 ">
-              <Link to="/signin">Signin</Link>
+              <Link className="btn btn-info" to="/signin">
+                Signin
+              </Link>
             </li>
           </ul>
         </nav>
