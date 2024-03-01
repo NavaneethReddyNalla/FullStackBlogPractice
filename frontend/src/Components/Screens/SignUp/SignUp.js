@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import "./SignUp.css";
 
@@ -9,9 +11,18 @@ function SignUp() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [err, setError] = useState("");
+  const navigate = useNavigate();
 
-  function onFormSubmit(data) {
-    console.log(data);
+  async function onFormSubmit(userObj) {
+    const res = await axios.post("http://localhost:5000/user/user", userObj);
+
+    if (res.data.message === "User created") {
+      setError("");
+      navigate("/signin");
+    } else {
+      setError(res.data.message);
+    }
   }
 
   return (
@@ -72,6 +83,8 @@ function SignUp() {
           id="email"
           className="form-control my-2"
         />
+
+        {err && <p className="text-danger lead">{err}</p>}
 
         <button type="submit" className="btn btn-success my-2">
           Register
