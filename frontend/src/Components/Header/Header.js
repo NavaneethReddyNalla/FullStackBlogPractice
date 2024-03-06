@@ -10,6 +10,8 @@ function Header() {
   const dispatch = useDispatch();
 
   function logout() {
+    sessionStorage.removeItem("token");
+
     const action = resetState();
     dispatch(action);
   }
