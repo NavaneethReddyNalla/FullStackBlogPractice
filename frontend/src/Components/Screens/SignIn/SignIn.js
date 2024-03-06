@@ -96,7 +96,7 @@ function SignIn() {
           id="password"
           className="form-control my-2"
         />
-
+        {errorOccured && <p className="lead text-danger">{errorMessage}</p>}
         <button type="submit" className="btn btn-success my-2">
           Login
         </button>
