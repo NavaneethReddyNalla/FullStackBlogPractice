@@ -48,7 +48,7 @@ const userOrAuthorLogin = async (req, res) => {
     if (dbuser === null) {
       return res.send({ message: "Invalid Username" });
     } else {
-      const status = bcryptjs.compare(userCred.password, dbuser.password);
+      const status = await bcryptjs.compare(userCred.password, dbuser.password);
       if (status === false) {
         return res.send({ message: "Invalid Password" });
       } else {
@@ -58,7 +58,7 @@ const userOrAuthorLogin = async (req, res) => {
 
         delete dbuser.password;
         res.send({
-          message: "Login Success",
+          message: "login success",
           token: signedToken,
           user: dbuser,
         });

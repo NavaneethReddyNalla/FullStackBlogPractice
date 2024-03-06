@@ -15,9 +15,16 @@ function SignUp() {
   const navigate = useNavigate();
 
   async function onFormSubmit(userObj) {
-    const res = await axios.post("http://localhost:5000/user/user", userObj);
+    const userType = userObj.userType;
+    const res = await axios.post(
+      `http://localhost:5000/${userType}/user`,
+      userObj
+    );
 
-    if (res.data.message === "User created") {
+    if (
+      res.data.message === "User created" ||
+      res.data.message === "Author created"
+    ) {
       setError("");
       navigate("/signin");
     } else {

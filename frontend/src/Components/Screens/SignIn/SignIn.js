@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import "./SignIn.css";
+import { userLoginThunk } from "../../../redux/slices/userLoginSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
   const {
@@ -10,9 +13,22 @@ function SignIn() {
     formState: { errors },
   } = useForm();
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { isPending, errorOccured, errorMessage, currentUser, loginStatus } =
+    useSelector((state) => state.userLogin);
+
   function onFormSubmit(data) {
-    console.log(data);
+    const action = userLoginThunk(data);
+    dispatch(action);
   }
+
+  useEffect(() => {
+    if (loginStatus === true) {
+      navigate("/user-profile");
+    }
+  }, [loginStatus]);
 
   return (
     <div className="bg-primary background pt-5">
