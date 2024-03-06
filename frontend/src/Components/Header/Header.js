@@ -6,7 +6,7 @@ import { resetState } from "../../redux/slices/userLoginSlice";
 import "./Header.css";
 
 function Header() {
-  const { loginStatus } = useSelector((state) => state.userLogin);
+  const { currentUser, loginStatus } = useSelector((state) => state.userLogin);
   const dispatch = useDispatch();
 
   function logout() {
@@ -42,6 +42,9 @@ function Header() {
             ) : (
               <>
                 <li>
+                  <span className="lead fs-3 text-warning me-4">
+                    {currentUser.username}
+                  </span>
                   <button className="btn btn-danger me-3" onClick={logout}>
                     Sign Out
                   </button>
