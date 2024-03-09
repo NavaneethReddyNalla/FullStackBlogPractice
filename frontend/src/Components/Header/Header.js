@@ -43,7 +43,7 @@ function Header() {
               <>
                 <li>
                   <span className="lead fs-3 text-warning me-4">
-                    {currentUser.username}
+                    {currentUser.username} <sup>{currentUser.userType}</sup>
                   </span>
                   <button className="btn btn-danger me-3" onClick={logout}>
                     Sign Out
