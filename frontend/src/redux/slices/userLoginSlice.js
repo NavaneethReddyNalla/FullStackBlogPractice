@@ -31,7 +31,7 @@ export const userLoginSlice = createSlice({
     loginStatus: false,
   },
   reducers: {
-    resetState: (state, paylod) => {
+    resetState: (state, payload) => {
       state.isPending = false;
       state.currentUser = {};
       state.errorOccured = false;
