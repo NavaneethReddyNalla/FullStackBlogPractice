@@ -27,12 +27,12 @@ function SignIn() {
   useEffect(() => {
     if (loginStatus === true) {
       if (currentUser.userType === "user") {
-        navigate("/");
+        navigate(`/${currentUser.username}`);
       } else if (currentUser.userType === "author") {
         navigate("/author-profile");
       }
     }
-  }, [currentUser.userType, loginStatus, navigate]);
+  }, [currentUser, loginStatus, navigate]);
 
   return (
     <div className="bg-primary background pt-5">

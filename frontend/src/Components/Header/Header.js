@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { resetState } from "../../redux/slices/userLoginSlice";
 
@@ -8,12 +8,14 @@ import "./Header.css";
 function Header() {
   const { currentUser, loginStatus } = useSelector((state) => state.userLogin);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function logout() {
     sessionStorage.removeItem("token");
 
     const action = resetState();
     dispatch(action);
+    navigate("/");
   }
 
   return (
