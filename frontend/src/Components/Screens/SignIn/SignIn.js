@@ -16,8 +16,9 @@ function SignIn() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isPending, errorOccured, errorMessage, currentUser, loginStatus } =
-    useSelector((state) => state.userLogin);
+  const { errorOccured, errorMessage, currentUser, loginStatus } = useSelector(
+    (state) => state.userLogin
+  );
 
   function onFormSubmit(data) {
     const action = userLoginThunk(data);
