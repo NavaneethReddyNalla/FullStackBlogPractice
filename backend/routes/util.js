@@ -53,7 +53,7 @@ const userOrAuthorLogin = async (req, res) => {
         return res.send({ message: "Invalid Password" });
       } else {
         const signedToken = jwt.sign({ username: dbuser.username }, "abcdef", {
-          expiresIn: 50,
+          expiresIn: "1d",
         });
 
         delete dbuser.password;
@@ -73,17 +73,17 @@ const userOrAuthorLogin = async (req, res) => {
     if (dbuser === null) {
       return res.send({ message: "Invalid Author name" });
     } else {
-      const status = bcryptjs.compare(userCred.password, dbuser.password);
+      const status = await bcryptjs.compare(userCred.password, dbuser.password);
       if (status === false) {
         return res.send({ message: "Invalid Password" });
       } else {
         const signedToken = jwt.sign({ username: dbuser.username }, "abcdef", {
-          expiresIn: 50,
+          expiresIn: "1d",
         });
 
         delete dbuser.password;
         res.send({
-          message: "Login Success",
+          message: "login success",
           token: signedToken,
           user: dbuser,
         });

@@ -27,9 +27,9 @@ function SignIn() {
   useEffect(() => {
     if (loginStatus === true) {
       if (currentUser.userType === "user") {
-        navigate(`/${currentUser.username}`);
+        navigate(`/user/${currentUser.username}`);
       } else if (currentUser.userType === "author") {
-        navigate("/author-profile");
+        navigate(`/author/${currentUser.username}`);
       }
     }
   }, [currentUser, loginStatus, navigate]);
