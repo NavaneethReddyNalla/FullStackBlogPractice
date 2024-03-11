@@ -60,6 +60,7 @@ DELETE http://localhost:5000/author/article/1709215839 HTTP/1.1
 
 ### Get all articles for users
 GET http://localhost:5000/user/articles HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5hdmFuZWV0aCIsImlhdCI6MTcxMDE0ODg4OSwiZXhwIjoxNzEwMjM1Mjg5fQ.m8ukj-nVYK3r32v03Sm3MPbBj3bbH3Z2ffBB3KshECo
 
 ### Write a Comment
 POST http://localhost:5000/user/comment/1709215839 HTTP/1.1

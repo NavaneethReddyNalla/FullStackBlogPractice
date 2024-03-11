@@ -1,11 +1,12 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
 import "./UserProfile.css";
 
 function UserProfile() {
   return (
     <div className="text-center bg-primary user-profile">
-      <p>User</p>
+      <Outlet />
     </div>
   );
 }

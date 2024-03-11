@@ -14,8 +14,8 @@ function Header() {
     sessionStorage.removeItem("token");
 
     const action = resetState();
-    dispatch(action);
     navigate("/");
+    dispatch(action);
   }
 
   return (
