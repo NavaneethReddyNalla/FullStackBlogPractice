@@ -11,6 +11,8 @@ import SignUp from "./Components/Screens/SignUp/SignUp";
 import UserProfile from "./Components/UserProfile/UserProfile";
 import AuthorProfile from "./Components/AuthorProfile/AuthorProfile";
 import Articles from "./Components/Articles/Articles";
+import AuthorArticles from "./Components/AuthorArticles/AuthorArticles";
+import WriteArticle from "./Components/WriteArticle/WriteArticle";
 
 function App() {
   const router = createBrowserRouter([
@@ -29,7 +31,15 @@ function App() {
             { path: "articles", element: <Articles /> },
           ],
         },
-        { path: "author/:author", element: <AuthorProfile /> },
+        {
+          path: "author/:author",
+          element: <AuthorProfile />,
+          children: [
+            { path: "my-articles", element: <AuthorArticles /> },
+            { path: "write-article", element: <WriteArticle /> },
+            { path: "", element: <Navigate to="my-articles" /> },
+          ],
+        },
       ],
     },
   ]);
