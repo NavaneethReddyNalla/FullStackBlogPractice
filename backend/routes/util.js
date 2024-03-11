@@ -1,5 +1,6 @@
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 // Request handler for user/author registration
 const createUserOrAuthor = async (req, res) => {
@@ -52,9 +53,13 @@ const userOrAuthorLogin = async (req, res) => {
       if (status === false) {
         return res.send({ message: "Invalid Password" });
       } else {
-        const signedToken = jwt.sign({ username: dbuser.username }, "abcdef", {
-          expiresIn: "1d",
-        });
+        const signedToken = jwt.sign(
+          { username: dbuser.username },
+          process.env.SECRET_KEY,
+          {
+            expiresIn: "1d",
+          }
+        );
 
         delete dbuser.password;
         res.send({
@@ -77,9 +82,13 @@ const userOrAuthorLogin = async (req, res) => {
       if (status === false) {
         return res.send({ message: "Invalid Password" });
       } else {
-        const signedToken = jwt.sign({ username: dbuser.username }, "abcdef", {
-          expiresIn: "1d",
-        });
+        const signedToken = jwt.sign(
+          { username: dbuser.username },
+          process.env.SECRET_KEY,
+          {
+            expiresIn: "1d",
+          }
+        );
 
         delete dbuser.password;
         res.send({
