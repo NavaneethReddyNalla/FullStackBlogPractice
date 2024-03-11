@@ -25,12 +25,27 @@ function Articles() {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       {err !== "" && <p>{err}</p>}
       {articles.length === 0 ? (
         <p>No Articles Published</p>
       ) : (
-        articles.map((article) => <p>{article.title}</p>)
+        <div className="row row-col-3 p-5">
+          {articles.map((article) => (
+            <div className="col" key={article.articleId}>
+              <div className="card" style={{ width: "18rem" }}>
+                <div className="card-body">
+                  <h5 className="card-title">{article.title}</h5>
+                  <h6 className="card-subtitle mb-2">{article.username}</h6>
+                  <p className="card-text">
+                    {article.content.slice(0, 20) + "..."}
+                  </p>
+                  <button className="btn btn-info">Read More...</button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
