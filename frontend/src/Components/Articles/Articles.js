@@ -30,7 +30,7 @@ function Articles() {
       {articles.length === 0 ? (
         <p>No Articles Published</p>
       ) : (
-        articles.map((article) => <p>article</p>)
+        articles.map((article) => <p>{article.title}</p>)
       )}
     </div>
   );
