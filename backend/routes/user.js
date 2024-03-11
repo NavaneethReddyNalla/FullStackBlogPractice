@@ -3,6 +3,7 @@ const userApp = express.Router();
 
 const { createUserOrAuthor, userOrAuthorLogin } = require("./util");
 const expressAsyncHandler = require("express-async-handler");
+const verifyToken = require("../middlewares/verifyToken");
 
 let usersCollection;
 let articlesCollection;
@@ -22,6 +23,7 @@ userApp.post("/login", expressAsyncHandler(userOrAuthorLogin));
 // Get all articles
 userApp.get(
   "/articles",
+  verifyToken,
   expressAsyncHandler(async (req, res) => {
     const articlesList = await articlesCollection
       .find({ status: true })
@@ -33,6 +35,7 @@ userApp.get(
 // Write a comment for the user to an article
 userApp.post(
   "/comment/:articleId",
+  verifyToken,
   expressAsyncHandler(async (req, res) => {
     const articleId = req.params.articleId;
     const userComment = req.body;
