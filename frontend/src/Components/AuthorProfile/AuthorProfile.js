@@ -6,11 +6,11 @@ import "./AuthorProfile.css";
 function AuthorProfile() {
   return (
     <div className="text-center bg-primary author-profile">
-      <nav>
-        <NavLink className="btn btn-info me-3" to="my-articles">
+      <nav className="navbar">
+        <NavLink className="btn btn-info m-3" to="my-articles">
           My Articles
         </NavLink>
-        <NavLink className="btn btn-info" to="write-article">
+        <NavLink className="btn btn-info m-3" to="write-article">
           Write Article
         </NavLink>
       </nav>

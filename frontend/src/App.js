@@ -4,6 +4,7 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
+
 import Root from "./Components/Root/Root";
 import Home from "./Components/Screens/Home/Home";
 import SignIn from "./Components/Screens/SignIn/SignIn";

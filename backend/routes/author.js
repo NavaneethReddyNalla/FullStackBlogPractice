@@ -3,6 +3,7 @@ const authorApp = express.Router();
 const expressAsyncHandler = require("express-async-handler");
 
 const { createUserOrAuthor, userOrAuthorLogin } = require("./util");
+const verifyToken = require("../middlewares/verifyToken");
 
 let authorsCollection, articlesCollection;
 
@@ -18,6 +19,7 @@ authorApp.post("/login", userOrAuthorLogin);
 // Creating the Article
 authorApp.post(
   "/new-article",
+  verifyToken,
   expressAsyncHandler(async (req, res) => {
     await articlesCollection.insertOne(req.body);
     res.send({ message: "Article added" });
@@ -27,6 +29,7 @@ authorApp.post(
 // Viewing the article
 authorApp.get(
   "/articles/:username",
+  verifyToken,
   expressAsyncHandler(async (req, res) => {
     const usernameOfAuthor = req.params.username;
 
@@ -41,6 +44,7 @@ authorApp.get(
 // Editing the article
 authorApp.put(
   "/article",
+  verifyToken,
   expressAsyncHandler(async (req, res) => {
     const modifiedArticle = req.body;
 
@@ -56,6 +60,7 @@ authorApp.put(
 // Soft deleting the article
 authorApp.delete(
   "/article/:articleId",
+  verifyToken,
   expressAsyncHandler(async (req, res) => {
     const articleId = req.params.articleId;
     await articlesCollection.updateOne(
