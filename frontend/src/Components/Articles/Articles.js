@@ -10,19 +10,21 @@ function Articles() {
     headers: { Authorization: `Bearer ${token}` },
   });
 
-  const getArticles = async () => {
-    const res = await axiosWithToken.get("http://localhost:5000/user/articles");
-
-    if (res.data.message === "All Articles") {
-      setArticles(res.data.payload);
-    } else {
-      setErr(res.data.message);
-    }
-  };
-
   useEffect(() => {
+    const getArticles = async () => {
+      const res = await axiosWithToken.get(
+        "http://localhost:5000/user/articles"
+      );
+
+      if (res.data.message === "All Articles") {
+        setArticles(res.data.payload);
+      } else {
+        setErr(res.data.message);
+      }
+    };
+
     getArticles();
-  }, []);
+  }, [axiosWithToken]);
 
   return (
     <div className="container">
@@ -33,7 +35,7 @@ function Articles() {
         <div className="row row-col-3 p-5">
           {articles.map((article) => (
             <div className="col" key={article.articleId}>
-              <div className="card" style={{ width: "18rem" }}>
+              <div className="card mb-5" style={{ width: "18rem" }}>
                 <div className="card-body">
                   <h5 className="card-title">{article.title}</h5>
                   <h6 className="card-subtitle mb-2">{article.username}</h6>
