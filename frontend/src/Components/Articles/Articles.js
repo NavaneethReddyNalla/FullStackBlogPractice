@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Articles() {
   const [articles, setArticles] = useState([]);
   const [err, setErr] = useState("");
+  const navigate = useNavigate();
 
   const token = sessionStorage.getItem("token");
   const axiosWithToken = axios.create({
@@ -26,6 +28,10 @@ function Articles() {
     getArticles();
   }, [axiosWithToken]);
 
+  function readMore(article) {
+    navigate(`../article/${article.articleId}`, { state: article });
+  }
+
   return (
     <div className="container">
       {err !== "" && <p>{err}</p>}
@@ -42,7 +48,12 @@ function Articles() {
                   <p className="card-text">
                     {article.content.slice(0, 20) + "..."}
                   </p>
-                  <button className="btn btn-info">Read More...</button>
+                  <button
+                    className="btn btn-info"
+                    onClick={() => readMore(article)}
+                  >
+                    Read More...
+                  </button>
                 </div>
               </div>
             </div>

@@ -14,6 +14,7 @@ import AuthorProfile from "./Components/AuthorProfile/AuthorProfile";
 import Articles from "./Components/Articles/Articles";
 import AuthorArticles from "./Components/AuthorArticles/AuthorArticles";
 import WriteArticle from "./Components/WriteArticle/WriteArticle";
+import ArticleById from "./Components/ArticleById/ArticleById";
 
 function App() {
   const router = createBrowserRouter([
@@ -30,6 +31,7 @@ function App() {
           children: [
             { path: "", element: <Navigate to="articles" /> },
             { path: "articles", element: <Articles /> },
+            { path: "article/:id", element: <ArticleById /> },
           ],
         },
         {
