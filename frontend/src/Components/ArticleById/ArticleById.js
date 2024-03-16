@@ -1,14 +1,27 @@
 import "./ArticleById.css";
 
 import React from "react";
+import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function ArticleById() {
   const article = useLocation().state;
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const { currentUser } = useSelector((state) => state.userLogin);
 
   function goBack() {
     navigate("../articles");
+  }
+
+  function postComment(comment) {
+    comment.username = currentUser.username;
+    console.log(comment);
   }
 
   return (
@@ -28,6 +41,18 @@ function ArticleById() {
         <br />
         <p style={{ whiteSpace: "pre-line" }}>{article.content}</p>
       </div>
+
+      <form onSubmit={handleSubmit(postComment)} className="bg-secondary mt-5">
+        <input
+          type="text"
+          placeholder="Comment..."
+          {...register("comment", { required: true })}
+          className="form-control"
+        />
+        <button type="submit" className="btn btn-info">
+          Post
+        </button>
+      </form>
     </>
   );
 }
