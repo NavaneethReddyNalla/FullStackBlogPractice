@@ -1,13 +1,15 @@
 import "./ArticleById.css";
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function ArticleById() {
   const article = useLocation().state;
   const navigate = useNavigate();
+  const [err, setErr] = useState("");
   const {
     register,
     handleSubmit,
@@ -15,13 +17,27 @@ function ArticleById() {
   } = useForm();
   const { currentUser } = useSelector((state) => state.userLogin);
 
+  const token = sessionStorage.getItem("token");
+  const axiosWithToken = axios.create({
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
   function goBack() {
     navigate("../articles");
   }
 
-  function postComment(comment) {
+  async function postComment(comment) {
     comment.username = currentUser.username;
-    console.log(comment);
+
+    const res = await axiosWithToken.post(
+      `http://localhost:5000/user/comment/${article.articleId}`,
+      comment
+    );
+
+    if (res.data.message !== "Comment added") {
+      setErr("Error Adding the Comment");
+      console.log(res.data.message);
+    }
   }
 
   return (
@@ -49,10 +65,25 @@ function ArticleById() {
           {...register("comment", { required: true })}
           className="form-control"
         />
+        {errors.comment?.type === "required" && (
+          <p className="text-danger lead fs-5">Comment can't be empty</p>
+        )}
         <button type="submit" className="btn btn-info">
           Post
         </button>
+        {err !== "" && <p className="text-danger lead fs-5">{err}</p>}
       </form>
+      <h4 className="mt-5">Comments:</h4>
+      {article.comments.map((comment) => {
+        return (
+          <div className="mb-5 comment">
+            <h5>{comment.username}</h5>
+            <h6>
+              <pre>{comment.comment}</pre>
+            </h6>
+          </div>
+        );
+      })}
     </>
   );
 }
