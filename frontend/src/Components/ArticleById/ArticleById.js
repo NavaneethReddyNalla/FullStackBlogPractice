@@ -26,7 +26,7 @@ function ArticleById() {
           <i>{article.dateOfModification}</i>
         </h6>
         <br />
-        <p>{article.content}</p>
+        <p style={{ whiteSpace: "pre-line" }}>{article.content}</p>
       </div>
     </>
   );
