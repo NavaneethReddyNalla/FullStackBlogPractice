@@ -40,6 +40,7 @@ function App() {
           children: [
             { path: "my-articles", element: <AuthorArticles /> },
             { path: "write-article", element: <WriteArticle /> },
+            { path: "article/:id", element: <ArticleById /> },
             { path: "", element: <Navigate to="my-articles" /> },
           ],
         },

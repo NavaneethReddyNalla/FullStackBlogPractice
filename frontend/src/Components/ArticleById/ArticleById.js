@@ -24,7 +24,8 @@ function ArticleById() {
   });
 
   function goBack() {
-    navigate("../articles");
+    if (currentUser.userType === "user") navigate("../articles");
+    else navigate("../my-articles");
   }
 
   async function postComment(comment) {
@@ -62,23 +63,32 @@ function ArticleById() {
         <p style={{ whiteSpace: "pre-line" }}>{article.content}</p>
       </div>
 
-      <form onSubmit={handleSubmit(postComment)} className="bg-secondary mt-5">
-        <input
-          type="text"
-          placeholder="Comment..."
-          {...register("comment", { required: true })}
-          className="form-control"
-        />
-        {errors.comment?.type === "required" && (
-          <p className="text-danger lead fs-5">Comment can't be empty</p>
-        )}
-        <button type="submit" className="btn btn-info">
-          Post
-        </button>
-        {success !== "" && <p className="text-success lead fs-5">{success}</p>}
-        {err !== "" && <p className="text-danger lead fs-5">{err}</p>}
-      </form>
+      {currentUser.userType === "user" && (
+        <form
+          onSubmit={handleSubmit(postComment)}
+          className="bg-secondary mt-5"
+        >
+          <input
+            type="text"
+            placeholder="Comment..."
+            {...register("comment", { required: true })}
+            className="form-control"
+          />
+          {errors.comment?.type === "required" && (
+            <p className="text-danger lead fs-5">Comment can't be empty</p>
+          )}
+          <button type="submit" className="btn btn-info">
+            Post
+          </button>
+          {success !== "" && (
+            <p className="text-success lead fs-5">{success}</p>
+          )}
+          {err !== "" && <p className="text-danger lead fs-5">{err}</p>}
+        </form>
+      )}
+
       <h4 className="mt-5">Comments:</h4>
+      {article.comments.length === 0 && <p>No Comments Found</p>}
       {article.comments.map((comment) => {
         return (
           <div className="mb-5 comment">
