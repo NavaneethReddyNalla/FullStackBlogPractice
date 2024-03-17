@@ -37,7 +37,7 @@ userApp.post(
   "/comment/:articleId",
   verifyToken,
   expressAsyncHandler(async (req, res) => {
-    const articleId = req.params.articleId;
+    const articleId = +req.params.articleId;
     const userComment = req.body;
 
     await articlesCollection.updateOne(
