@@ -10,6 +10,7 @@ function ArticleById() {
   const article = useLocation().state;
   const navigate = useNavigate();
   const [err, setErr] = useState("");
+  const [success, setSuccess] = useState("");
   const {
     register,
     handleSubmit,
@@ -37,6 +38,9 @@ function ArticleById() {
     if (res.data.message !== "Comment added") {
       setErr("Error Adding the Comment");
       console.log(res.data.message);
+    } else {
+      setSuccess(res.data.message);
+      article.comments.push(comment);
     }
   }
 
@@ -71,6 +75,7 @@ function ArticleById() {
         <button type="submit" className="btn btn-info">
           Post
         </button>
+        {success !== "" && <p className="text-success lead fs-5">{success}</p>}
         {err !== "" && <p className="text-danger lead fs-5">{err}</p>}
       </form>
       <h4 className="mt-5">Comments:</h4>
