@@ -1,6 +1,8 @@
 import "./ArticleById.css";
 
 import React, { useState } from "react";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -50,6 +52,17 @@ function ArticleById() {
       <button className="btn btn-danger ms-4 mt-5 back-button" onClick={goBack}>
         Back
       </button>
+      {currentUser.userType === "author" && (
+        <div className="author-panel">
+          <button>
+            <FaEdit />
+          </button>
+          <button>
+            <MdDelete />
+          </button>
+        </div>
+      )}
+
       <div className="text-start m-auto w-50 p-4 bg-white article">
         <h2>{article.title}</h2>
         <h5>- By {article.username}</h5>
