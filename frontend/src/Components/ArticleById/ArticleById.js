@@ -47,6 +47,17 @@ function ArticleById() {
     }
   }
 
+  async function deleteArticle() {
+    const id = article.articleId;
+    const res = await axiosWithToken.delete(
+      `http://localhost:5000/author/article/${id}`
+    );
+
+    if (res.data.message === "Article Deleted") {
+      navigate("../my-articles");
+    }
+  }
+
   return (
     <>
       <button className="btn btn-danger ms-4 mt-5 back-button" onClick={goBack}>
@@ -57,7 +68,7 @@ function ArticleById() {
           <button>
             <FaEdit />
           </button>
-          <button>
+          <button onClick={deleteArticle}>
             <MdDelete />
           </button>
         </div>

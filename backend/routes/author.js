@@ -34,7 +34,7 @@ authorApp.get(
     const usernameOfAuthor = req.params.username;
 
     const articleLlist = await articlesCollection
-      .find({ username: userOrAuthorLogin })
+      .find({ username: usernameOfAuthor, status: true })
       .toArray();
 
     res.send({ message: "Articles", payload: articleLlist });
@@ -62,7 +62,7 @@ authorApp.delete(
   "/article/:articleId",
   verifyToken,
   expressAsyncHandler(async (req, res) => {
-    const articleId = req.params.articleId;
+    const articleId = +req.params.articleId;
     await articlesCollection.updateOne(
       { articleId: articleId },
       { $set: { status: false } }
