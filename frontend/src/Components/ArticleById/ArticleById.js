@@ -65,7 +65,7 @@ function ArticleById() {
       </button>
       {currentUser.userType === "author" && (
         <div className="author-panel">
-          <button>
+          <button onClick={navigate("../edit-article", { state: article })}>
             <FaEdit />
           </button>
           <button onClick={deleteArticle}>

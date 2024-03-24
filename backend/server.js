@@ -19,7 +19,7 @@ mongoClient
     app.set("articlesCollection", articlesCollection);
     console.log("Database connection established");
   })
-  .catch((err) => console.log("Error connecting to Database"));
+  .catch((err) => console.log("Error connecting to Database " + err));
 
 // Import apis
 const userApp = require("./routes/user");
