@@ -33,6 +33,8 @@ function WriteArticle() {
     } else {
       setErr(res.data.message);
     }
+
+    return;
   }
 
   return (

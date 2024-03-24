@@ -47,13 +47,15 @@ authorApp.put(
   verifyToken,
   expressAsyncHandler(async (req, res) => {
     const modifiedArticle = req.body;
+    delete modifiedArticle._id;
 
-    await articlesCollection.updateOne(
+    const article = await articlesCollection.findOneAndUpdate(
       { articleId: modifiedArticle.articleId },
-      { $set: { ...modifiedArticle } }
+      { $set: { ...modifiedArticle } },
+      { returnDocument: "after" }
     );
 
-    res.send({ message: "Article Modified" });
+    res.send({ message: "Article Modified", payload: article });
   })
 );
 

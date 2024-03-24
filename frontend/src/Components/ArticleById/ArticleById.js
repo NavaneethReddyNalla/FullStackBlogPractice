@@ -1,6 +1,6 @@
 import "./ArticleById.css";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useForm } from "react-hook-form";
@@ -26,8 +26,7 @@ function ArticleById() {
   });
 
   function goBack() {
-    if (currentUser.userType === "user") navigate("../articles");
-    else navigate("../my-articles");
+    navigate("../my-articles");
   }
 
   async function postComment(comment) {
@@ -65,7 +64,13 @@ function ArticleById() {
       </button>
       {currentUser.userType === "author" && (
         <div className="author-panel">
-          <button onClick={navigate("../edit-article", { state: article })}>
+          <button
+            onClick={() =>
+              navigate(`/author/${article.username}/edit-article`, {
+                state: article,
+              })
+            }
+          >
             <FaEdit />
           </button>
           <button onClick={deleteArticle}>
@@ -88,10 +93,7 @@ function ArticleById() {
       </div>
 
       {currentUser.userType === "user" && (
-        <form
-          onSubmit={handleSubmit(postComment)}
-          className="bg-secondary mt-5"
-        >
+        <form onSubmit={handleSubmit(postComment)} className="bg-primary mt-5">
           <input
             type="text"
             placeholder="Comment..."

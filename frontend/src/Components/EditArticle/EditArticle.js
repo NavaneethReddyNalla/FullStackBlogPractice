@@ -2,34 +2,35 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function EditArticle() {
   const { currentUser } = useSelector((state) => state.userLogin);
   const { register, handleSubmit } = useForm();
   const [err, setErr] = useState("");
   const navigate = useNavigate();
+  const article = useLocation().state;
 
   const token = sessionStorage.getItem("token");
   const axiosWithToken = axios.create({
     headers: { Authorization: `Bearer ${token}` },
   });
 
-  async function handleFormSubmit(article) {
-    article.articleId = Date.now();
-    article.dateOfCreation = new Date();
+  async function handleFormSubmit(editedArticle) {
     article.dateOfModification = new Date();
-    article.username = currentUser.username;
-    article.comments = [];
-    article.status = true;
+    article.title = editedArticle.title;
+    article.category = editedArticle.category;
+    article.content = editedArticle.content;
 
-    const res = await axiosWithToken.post(
-      "http://localhost:5000/author/new-article",
+    const res = await axiosWithToken.put(
+      "http://localhost:5000/author/article",
       article
     );
 
-    if (res.data.message === "Article added") {
-      navigate("../my-articles");
+    if (res.data.message === "Article Modified") {
+      navigate(`/author/${currentUser.username}/article/${article.articleId}`, {
+        state: res.data.payload,
+      });
     } else {
       setErr(res.data.message);
     }
@@ -41,11 +42,16 @@ function EditArticle() {
         <input
           className="form-control"
           type="text"
+          defaultValue={article.title}
           {...register("title")}
           id="title"
           placeholder="title"
         />
-        <select className="form-select" {...register("category")}>
+        <select
+          className="form-select"
+          {...register("category")}
+          defaultValue={article.category}
+        >
           <option selected disabled>
             Category
           </option>
@@ -61,12 +67,13 @@ function EditArticle() {
           cols="30"
           rows="10"
           placeholder="Content..."
+          defaultValue={article.content}
         ></textarea>
 
         {err !== "" && <p className="lead fs-4 text-danger">{err}</p>}
 
         <button className="btn btn-success" type="submit">
-          Create
+          Save
         </button>
       </form>
     </div>
