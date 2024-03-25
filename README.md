@@ -32,7 +32,7 @@
 - Create a new file named `.env` in the `backend` folder.
 - Open the file and add the environment variables.
 - The necessary environment variables for the project functioning are `PORT`, `DB_URL` AND `SECRET_KEY`.
-- `PORT` is the port number on which the server will be running.
+- `PORT` is the port number on which the server will be running. Port number 5000 is recommended as all the `axios` requests are made for the server running on 5000 port.
 - `DB_URL` is the connection string of the mongodb server.
 - `SECRET_KEY` is the key that is used by JWT to create unique tokens.
 - ### Example `.env` file:
