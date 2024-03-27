@@ -58,10 +58,12 @@ const userOrAuthorLogin = async (req, res) => {
       delete userCred.password;
 
       return res.send({
-        message: "Admin Logged in",
-        token: token,
+        message: "login success",
+        token: signedToken,
         user: userCred,
       });
+    } else {
+      return res.send({ message: "Unauthorized" });
     }
   }
 

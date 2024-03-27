@@ -16,6 +16,7 @@ import AuthorArticles from "./Components/AuthorArticles/AuthorArticles";
 import WriteArticle from "./Components/WriteArticle/WriteArticle";
 import ArticleById from "./Components/ArticleById/ArticleById";
 import EditArticle from "./Components/EditArticle/EditArticle";
+import Admin from "./Components/Admin/Admin";
 
 function App() {
   const router = createBrowserRouter([
@@ -26,6 +27,7 @@ function App() {
         { path: "", element: <Home /> },
         { path: "signin", element: <SignIn /> },
         { path: "signup", element: <SignUp /> },
+        { path: "admin", element: <Admin /> },
         {
           path: "user/:user",
           element: <UserProfile />,

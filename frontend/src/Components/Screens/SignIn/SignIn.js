@@ -31,6 +31,8 @@ function SignIn() {
         navigate(`/user/${currentUser.username}`);
       } else if (currentUser.userType === "author") {
         navigate(`/author/${currentUser.username}`);
+      } else if (currentUser.userType === "admin") {
+        navigate("/admin");
       }
     }
   }, [currentUser, loginStatus, navigate]);

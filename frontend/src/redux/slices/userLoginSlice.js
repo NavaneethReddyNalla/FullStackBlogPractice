@@ -12,6 +12,9 @@ export const userLoginThunk = createAsyncThunk(
     if (userCred.userType === "author")
       res = await axios.post("http://localhost:5000/author/login", userCred);
 
+    if (userCred.userType === "admin")
+      res = await axios.post("http://localhost:5000/admin/login", userCred);
+
     if (res.data.message === "login success") {
       sessionStorage.setItem("token", res.data.token);
       return res.data;
