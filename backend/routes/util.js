@@ -42,6 +42,29 @@ const userOrAuthorLogin = async (req, res) => {
 
   const userCred = req.body;
 
+  if (userCred.userType === "admin") {
+    if (
+      userCred.username === process.env.ADMIN &&
+      userCred.password === process.env.ADMIN_PWD
+    ) {
+      const signedToken = jwt.sign(
+        { username: userCred.username },
+        process.env.SECRET_KEY,
+        {
+          expiresIn: "1d",
+        }
+      );
+
+      delete userCred.password;
+
+      return res.send({
+        message: "Admin Logged in",
+        token: token,
+        user: userCred,
+      });
+    }
+  }
+
   if (userCred.userType === "user") {
     const dbuser = await usersCollection.findOne({
       username: userCred.username,
