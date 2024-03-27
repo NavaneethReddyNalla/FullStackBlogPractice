@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const path = require("path");
 require("dotenv").config();
 
@@ -20,6 +21,9 @@ mongoClient
     console.log("Database connection established");
   })
   .catch((err) => console.log("Error connecting to Database " + err));
+
+// Cross Origin Reference Middleware
+app.use(cors());
 
 // Import apis
 const userApp = require("./routes/user");
