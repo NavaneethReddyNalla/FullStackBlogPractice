@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 function Admin() {
   const [articles, setArticles] = useState([]);
   const [err, setErr] = useState("");
-  const navigate = useNavigate();
 
   const token = sessionStorage.getItem("token");
   const axiosWithToken = axios.create({
@@ -28,7 +26,16 @@ function Admin() {
     getArticles();
   }, [axiosWithToken]);
 
-  async function deleteArticle() {}
+  async function deleteArticle(article) {
+    const id = article.articleId;
+    const res = await axiosWithToken.delete(
+      `http://localhost:5000/author/article/${id}`
+    );
+
+    if (res.data.message === "Article Deleted") {
+      setArticles(articles.filter((article) => article.articleId !== id));
+    }
+  }
 
   return (
     <div className="container">
